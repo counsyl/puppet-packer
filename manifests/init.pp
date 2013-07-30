@@ -96,8 +96,10 @@ class packer(
              "${bin_dir}/packer-builder-virtualbox",
              "${bin_dir}/packer-builder-vmware",
              "${bin_dir}/packer-command-build",
+             "${bin_dir}/packer-command-fix",
              "${bin_dir}/packer-command-validate",
              "${bin_dir}/packer-post-processor-vagrant",
+             "${bin_dir}/packer-provisioner-file",
              "${bin_dir}/packer-provisioner-shell"
              ]:
                ensure => absent,
