@@ -8,7 +8,7 @@
 #  Defaults to 'installed', if set to 'absent' will remove Packer.
 #
 # [*version*]
-#  The version of Packer to install, defaults to '0.2.1'.
+#  The version of Packer to install, defaults to '0.2.3'.
 #
 # [*bin_dir*]
 #  The binary directory to place Packer in.  Defaults to '/usr/local/bin'.
@@ -23,7 +23,7 @@
 #
 class packer(
   $ensure    = 'installed',
-  $version   = '0.2.1',
+  $version   = '0.2.3',
   $bin_dir   = '/usr/local/bin',
   $cache_dir = '/usr/local/packer',
   $base_url  = 'https://dl.bintray.com/mitchellh/packer/',
