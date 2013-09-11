@@ -92,8 +92,8 @@ class packer(
       # Ensure the binaries are removed.
       file {["${bin_dir}/packer",
              "${bin_dir}/packer-builder-amazon-chroot",
-             "${bin_dir}/packer-builder-amazon-instance",
              "${bin_dir}/packer-builder-amazon-ebs",
+             "${bin_dir}/packer-builder-amazon-instance",
              "${bin_dir}/packer-builder-digitalocean",
              "${bin_dir}/packer-builder-openstack",
              "${bin_dir}/packer-builder-virtualbox",
@@ -105,6 +105,7 @@ class packer(
              "${bin_dir}/packer-post-processor-vagrant",
              "${bin_dir}/packer-provisioner-chef-solo",
              "${bin_dir}/packer-provisioner-file",
+             "${bin_dir}/packer-provisioner-puppet-masterless",
              "${bin_dir}/packer-provisioner-salt-masterless",
              "${bin_dir}/packer-provisioner-shell"
              ]:
