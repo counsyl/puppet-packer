@@ -8,7 +8,7 @@
 #  Defaults to 'installed', if set to 'absent' will remove Packer.
 #
 # [*version*]
-#  The version of Packer to install, defaults to '0.3.7'.
+#  The version of Packer to install, defaults to '0.3.11'.
 #
 # [*bin_dir*]
 #  The binary directory to place Packer in.  Defaults to '/usr/local/bin'.
@@ -23,7 +23,7 @@
 #
 class packer(
   $ensure    = 'installed',
-  $version   = '0.3.7',
+  $version   = '0.3.11',
   $bin_dir   = '/usr/local/bin',
   $cache_dir = '/usr/local/packer',
   $base_url  = 'https://dl.bintray.com/mitchellh/packer/',
@@ -34,7 +34,7 @@ class packer(
       include sys
       include sys::unzip
 
-      if $::architecture in ['x86_64', 'amd64'] {
+      if $::architecture in ['x86_64', 'amd64', 'x64'] {
         $arch = 'amd64'
       } else {
         $arch = '386'
@@ -46,21 +46,6 @@ class packer(
       $packer_zip = "${cache_dir}/${packer_basename}"
       $packer_url = "${base_url}${packer_basename}"
 
-      # Determining what command we need to download.
-      case $::kernel {
-        darwin: {
-          $dl_cmd = '/usr/bin/curl -L -O'
-        }
-        linux, openbsd: {
-          include sys::wget
-          $dl_cmd = "${sys::wget::path} -q"
-          Class['sys::wget'] -> Exec['download-packer']
-        }
-        default: {
-          fail("Do not know how to install Packer on ${::kernel}\n.")
-        }
-      }
-
       # Ensure cache directory for Packer's zip archives exists.
       file { $cache_dir:
         ensure => directory,
@@ -70,12 +55,10 @@ class packer(
       }
 
       # Download the Packer zip archive to the cache.
-      exec { 'download-packer':
-        command => "${dl_cmd} ${packer_url}",
-        cwd     => $cache_dir,
-        user    => 'root',
-        creates => $packer_zip,
-        require => File[$cache_dir],
+      sys::fetch { 'download-packer':
+        destination => $packer_zip,
+        source      => $packer_url,
+        require     => File[$cache_dir],
       }
 
       # Unzip directly into the binary directory, overwriting previous files.
@@ -85,7 +68,7 @@ class packer(
         cwd     => $bin_dir,
         user    => 'root',
         unless  => "test -x packer && packer --version | grep '^Packer v${version}$'",
-        require => Exec['download-packer'],
+        require => Sys::Fetch['download-packer'],
       }
     }
     'absent', 'uninstalled': {
@@ -103,6 +86,7 @@ class packer(
              "${bin_dir}/packer-command-inspect",
              "${bin_dir}/packer-command-validate",
              "${bin_dir}/packer-post-processor-vagrant",
+             "${bin_dir}/packer-provisioner-ansible-local",
              "${bin_dir}/packer-provisioner-chef-solo",
              "${bin_dir}/packer-provisioner-file",
              "${bin_dir}/packer-provisioner-puppet-masterless",
