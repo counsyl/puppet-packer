@@ -8,7 +8,7 @@
 #  Defaults to 'installed', if set to 'absent' will remove Packer.
 #
 # [*version*]
-#  The version of Packer to install, defaults to '0.3.11'.
+#  The version of Packer to install, defaults to '0.4.0'.
 #
 # [*bin_dir*]
 #  The binary directory to place Packer in.  Defaults to '/usr/local/bin'.
@@ -23,7 +23,7 @@
 #
 class packer(
   $ensure    = 'installed',
-  $version   = '0.3.11',
+  $version   = '0.4.0',
   $bin_dir   = '/usr/local/bin',
   $cache_dir = '/usr/local/packer',
   $base_url  = 'https://dl.bintray.com/mitchellh/packer/',
@@ -78,7 +78,9 @@ class packer(
              "${bin_dir}/packer-builder-amazon-ebs",
              "${bin_dir}/packer-builder-amazon-instance",
              "${bin_dir}/packer-builder-digitalocean",
+             "${bin_dir}/packer-builder-docker",
              "${bin_dir}/packer-builder-openstack",
+             "${bin_dir}/packer-packer-builder-qemu",
              "${bin_dir}/packer-builder-virtualbox",
              "${bin_dir}/packer-builder-vmware",
              "${bin_dir}/packer-command-build",
@@ -86,6 +88,7 @@ class packer(
              "${bin_dir}/packer-command-inspect",
              "${bin_dir}/packer-command-validate",
              "${bin_dir}/packer-post-processor-vagrant",
+             "${bin_dir}/packer-post-processor-vsphere",
              "${bin_dir}/packer-provisioner-ansible-local",
              "${bin_dir}/packer-provisioner-chef-solo",
              "${bin_dir}/packer-provisioner-file",
