@@ -8,7 +8,7 @@
 #  Defaults to 'installed', if set to 'absent' will remove Packer.
 #
 # [*version*]
-#  The version of Packer to install, defaults to '0.4.0'.
+#  The version of Packer to install, defaults to '0.5.1'.
 #
 # [*bin_dir*]
 #  The binary directory to place Packer in.  Defaults to '/usr/local/bin'.
@@ -23,7 +23,7 @@
 #
 class packer(
   $ensure    = 'installed',
-  $version   = '0.4.0',
+  $version   = '0.5.1',
   $bin_dir   = '/usr/local/bin',
   $cache_dir = '/usr/local/packer',
   $base_url  = 'https://dl.bintray.com/mitchellh/packer/',
@@ -79,10 +79,14 @@ class packer(
              "${bin_dir}/packer-builder-amazon-instance",
              "${bin_dir}/packer-builder-digitalocean",
              "${bin_dir}/packer-builder-docker",
+             "${bin_dir}/packer-builder-googlecompute",
              "${bin_dir}/packer-builder-openstack",
+             "${bin_dir}/packer-builder-qemu",
              "${bin_dir}/packer-packer-builder-qemu",
-             "${bin_dir}/packer-builder-virtualbox",
-             "${bin_dir}/packer-builder-vmware",
+             "${bin_dir}/packer-builder-virtualbox-iso",
+             "${bin_dir}/packer-builder-virtualbox-ovf",
+             "${bin_dir}/packer-builder-vmware-iso",
+             "${bin_dir}/packer-builder-vmware-ovf",
              "${bin_dir}/packer-command-build",
              "${bin_dir}/packer-command-fix",
              "${bin_dir}/packer-command-inspect",
