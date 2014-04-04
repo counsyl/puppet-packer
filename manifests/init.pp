@@ -41,7 +41,7 @@ class packer(
       }
 
       $packer_basename = inline_template(
-        "<%= \"#{@version}_#{scope.lookupvar('::kernel').downcase}_#{@arch}.zip\" %>"
+        "<%= \"#{@version}_#{scope['::kernel'].downcase}_#{@arch}.zip\" %>"
       )
       $packer_zip = "${cache_dir}/${packer_basename}"
       $packer_url = "${base_url}${packer_basename}"
