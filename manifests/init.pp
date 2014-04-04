@@ -8,7 +8,7 @@
 #  Defaults to 'installed', if set to 'absent' will remove Packer.
 #
 # [*version*]
-#  The version of Packer to install, defaults to '0.5.1'.
+#  The version of Packer to install, defaults to '0.5.2'.
 #
 # [*bin_dir*]
 #  The binary directory to place Packer in.  Defaults to '/usr/local/bin'.
@@ -23,7 +23,7 @@
 #
 class packer(
   $ensure    = 'installed',
-  $version   = '0.5.1',
+  $version   = '0.5.2',
   $bin_dir   = '/usr/local/bin',
   $cache_dir = '/usr/local/packer',
   $base_url  = 'https://dl.bintray.com/mitchellh/packer/',
@@ -91,6 +91,8 @@ class packer(
              "${bin_dir}/packer-command-fix",
              "${bin_dir}/packer-command-inspect",
              "${bin_dir}/packer-command-validate",
+             "${bin_dir}/packer-post-processor-docker-import",
+             "${bin_dir}/packer-post-processor-docker-push",
              "${bin_dir}/packer-post-processor-vagrant",
              "${bin_dir}/packer-post-processor-vsphere",
              "${bin_dir}/packer-provisioner-ansible-local",
