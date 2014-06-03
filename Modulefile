@@ -1,5 +1,5 @@
 name    'counsyl-packer'
-version '0.9.11'
+version '0.9.12'
 source  'git://github.com/counsyl/puppet-packer.git'
 author  'Counsyl, Inc.'
 license 'Apache License, Version 2.0'
