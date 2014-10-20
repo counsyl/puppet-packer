@@ -39,17 +39,17 @@ class packer(
       } else {
         $arch = '386'
       }
-      
+
       if versioncmp($version, '0.7.0') >= 0 {
         $prefix = 'packer_'
       } else {
         $prefix = ''
       }
-      
+
       $packer_basename = inline_template(
         "<%= \"#{@prefix}#{@version}_#{scope['::kernel'].downcase}_#{@arch}.zip\" %>"
       )
-      
+
       $packer_zip = "${cache_dir}/${packer_basename}"
       $packer_url = "${base_url}${packer_basename}"
 
