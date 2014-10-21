@@ -97,6 +97,7 @@ class packer(
              "${bin_dir}/packer-builder-virtualbox-ovf",
              "${bin_dir}/packer-builder-vmware-iso",
              "${bin_dir}/packer-builder-vmware-ovf",
+             "${bin_dir}/packer-builder-vmware-vmx",
              "${bin_dir}/packer-command-build",
              "${bin_dir}/packer-command-fix",
              "${bin_dir}/packer-command-inspect",
