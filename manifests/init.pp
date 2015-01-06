@@ -8,7 +8,7 @@
 #  Defaults to 'installed', if set to 'absent' will remove Packer.
 #
 # [*version*]
-#  The version of Packer to install, defaults to '0.7.1'.
+#  The version of Packer to install, defaults to '0.7.5'.
 #
 # [*bin_dir*]
 #  The binary directory to place Packer in.  Defaults to '/usr/local/bin'.
@@ -23,7 +23,7 @@
 #
 class packer(
   $ensure    = 'installed',
-  $version   = '0.7.1',
+  $version   = '0.7.5',
   $bin_dir   = '/usr/local/bin',
   $cache_dir = '/usr/local/packer',
   $base_url  = 'https://dl.bintray.com/mitchellh/packer/',
@@ -92,16 +92,11 @@ class packer(
              "${bin_dir}/packer-builder-parallels-iso",
              "${bin_dir}/packer-builder-parallels-pvm",
              "${bin_dir}/packer-builder-qemu",
-             "${bin_dir}/packer-packer-builder-qemu",
              "${bin_dir}/packer-builder-virtualbox-iso",
              "${bin_dir}/packer-builder-virtualbox-ovf",
              "${bin_dir}/packer-builder-vmware-iso",
-             "${bin_dir}/packer-builder-vmware-ovf",
              "${bin_dir}/packer-builder-vmware-vmx",
-             "${bin_dir}/packer-command-build",
-             "${bin_dir}/packer-command-fix",
-             "${bin_dir}/packer-command-inspect",
-             "${bin_dir}/packer-command-validate",
+             "${bin_dir}/packer-post-processor-atlas",
              "${bin_dir}/packer-post-processor-compress",
              "${bin_dir}/packer-post-processor-docker-import",
              "${bin_dir}/packer-post-processor-docker-push",
@@ -112,10 +107,10 @@ class packer(
              "${bin_dir}/packer-post-processor-vsphere",
              "${bin_dir}/packer-provisioner-ansible-local",
              "${bin_dir}/packer-provisioner-chef-client",
-             "${bin_dir}/packer-provisioner-puppet-server",
              "${bin_dir}/packer-provisioner-chef-solo",
              "${bin_dir}/packer-provisioner-file",
              "${bin_dir}/packer-provisioner-puppet-masterless",
+             "${bin_dir}/packer-provisioner-puppet-server",
              "${bin_dir}/packer-provisioner-salt-masterless",
              "${bin_dir}/packer-provisioner-shell"
              ]:
