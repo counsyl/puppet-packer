@@ -42,8 +42,10 @@ class packer(
 
       if versioncmp($version, '0.7.0') >= 0 {
         $prefix = 'packer_'
+        $version_test = "test -x packer && packer version | grep '^Packer v${version}$'"
       } else {
         $prefix = ''
+        $version_test = "test -x packer && packer --version | grep '^Packer v${version}$'"
       }
 
       $packer_basename = inline_template(
@@ -74,7 +76,7 @@ class packer(
         path    => [$bin_dir, '/usr/bin', '/bin'],
         cwd     => $bin_dir,
         user    => 'root',
-        unless  => "test -x packer && packer --version | grep '^Packer v${version}$'",
+        unless  => $version_test,
         require => Sys::Fetch['download-packer'],
       }
     }
