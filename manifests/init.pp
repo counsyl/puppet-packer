@@ -74,7 +74,7 @@ class packer(
         path    => [$bin_dir, '/usr/bin', '/bin'],
         cwd     => $bin_dir,
         user    => 'root',
-        unless  => "test -x packer && packer --version | grep '^Packer v${version}$'",
+        unless  => "test -x packer && packer version | head -n 1 | grep '^Packer v${version}$'",
         require => Sys::Fetch['download-packer'],
       }
     }
