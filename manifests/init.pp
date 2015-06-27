@@ -88,6 +88,7 @@ class packer(
           'packer-builder-amazon-instance',
           'packer-builder-digitalocean',
           'packer-builder-docker',
+          'packer-builder-file',
           'packer-builder-googlecompute',
           'packer-builder-null',
           'packer-builder-openstack',
@@ -125,6 +126,7 @@ class packer(
 
       file { $binaries:
         ensure => absent,
+        backup => false,
       }
     }
     default: {

@@ -7,6 +7,7 @@ IMPROVEMENTS:
 BUG FIXES:
 
 * Fix version checking exec to not stall when there's a Packer update.
+* Don't backup files removed when `ensure => absent`.
 
 ## 0.9.15 (05/08/2015)
 
