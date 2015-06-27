@@ -1,3 +1,13 @@
+## 0.9.16 (06/27/2015)
+
+IMPROVEMENTS:
+
+* Upgrade to Packer 0.8.0.
+
+BUG FIXES:
+
+* Fix version checking exec to not stall when there's a Packer update.
+
 ## 0.9.15 (05/08/2015)
 
 BUG FIXES:
