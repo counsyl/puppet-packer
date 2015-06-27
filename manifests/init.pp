@@ -8,7 +8,7 @@
 #  Defaults to 'installed', if set to 'absent' will remove Packer.
 #
 # [*version*]
-#  The version of Packer to install, defaults to '0.7.5'.
+#  The version of Packer to install, defaults to '0.8.0'.
 #
 # [*bin_dir*]
 #  The binary directory to place Packer in.  Defaults to '/usr/local/bin'.
@@ -23,7 +23,7 @@
 #
 class packer(
   $ensure    = 'installed',
-  $version   = '0.7.5',
+  $version   = '0.8.0',
   $bin_dir   = '/usr/local/bin',
   $cache_dir = '/usr/local/packer',
   $base_url  = 'https://dl.bintray.com/mitchellh/packer/',
@@ -74,7 +74,7 @@ class packer(
         path    => [$bin_dir, '/usr/bin', '/bin'],
         cwd     => $bin_dir,
         user    => 'root',
-        unless  => "test -x packer && packer version | head -n 1 | grep '^Packer v${version}$'",
+        unless  => "test -x packer && packer version | grep '^Packer v${version}'",
         require => Sys::Fetch['download-packer'],
       }
     }
@@ -111,10 +111,14 @@ class packer(
           'packer-provisioner-chef-client',
           'packer-provisioner-chef-solo',
           'packer-provisioner-file',
+          'packer-provisioner-powershell',
           'packer-provisioner-puppet-masterless',
           'packer-provisioner-puppet-server',
           'packer-provisioner-salt-masterless',
           'packer-provisioner-shell',
+          'packer-provisioner-shell-local',
+          'packer-provisioner-windows-restart',
+          'packer-provisioner-windows-shell',
         ],
         "${bin_dir}/"
       )
