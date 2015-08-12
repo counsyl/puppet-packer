@@ -68,6 +68,7 @@ class packer(
       sys::fetch { 'download-packer':
         destination => $packer_zip,
         source      => $packer_url,
+        cert_check  => true,
         require     => File[$cache_dir],
       }
 
