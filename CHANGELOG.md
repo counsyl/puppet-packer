@@ -1,4 +1,4 @@
-## 0.9.17 (unreleased)
+## 0.9.17 (08/12/2015)
 
 IMPROVEMENTS:
 
