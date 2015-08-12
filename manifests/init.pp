@@ -49,6 +49,17 @@ class packer(
         $prefix = ''
       }
 
+      # Escape periods in version for grep check.
+      $version_escaped = join(split($version, '\.'), '\.')
+
+      # In 0.8.0+ the `--version` option now works properly, and doesn't make
+      # a network query for latest version like `packer version` does.
+      if versioncmp($version, '0.8.0') >= 0 {
+        $version_check = "packer --version | grep '^${version_escaped}$'"
+      } else {
+        $version_check = "packer version | grep '^Packer v${version_escaped}'"
+      }
+
       $packer_basename = inline_template(
         "<%= \"#{@prefix}#{@version}_#{scope['::kernel'].downcase}_#{@arch}.zip\" %>"
       )
@@ -78,7 +89,7 @@ class packer(
         path    => [$bin_dir, '/usr/bin', '/bin'],
         cwd     => $bin_dir,
         user    => 'root',
-        unless  => "test -x packer && packer version | grep '^Packer v${version}'",
+        unless  => "test -x packer && ${version_check}",
         require => Sys::Fetch['download-packer'],
       }
     }

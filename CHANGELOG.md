@@ -5,6 +5,7 @@ IMPROVEMENTS:
 * Upgrade to Packer 0.8.5.
 * Improve parameter validation.
 * Validate SSL certificate for HTTPS downloads by default.
+* Improve version checking by using `packer --version` on 0.8.0+.
 
 ## 0.9.16 (06/27/2015)
 
