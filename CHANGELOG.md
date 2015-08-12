@@ -1,3 +1,9 @@
+## 0.9.17 (unreleased)
+
+IMPROVEMENTS:
+
+* Upgrade to Packer 0.8.5.
+
 ## 0.9.16 (06/27/2015)
 
 IMPROVEMENTS:
