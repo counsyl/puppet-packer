@@ -28,6 +28,9 @@ class packer(
   $cache_dir = '/usr/local/packer',
   $base_url  = 'https://dl.bintray.com/mitchellh/packer/',
 ){
+  validate_re($version, '^\d+\.\d+\.\d+$')
+  validate_absolute_path([$bin_dir, $cache_dir])
+
   case $ensure {
     'present', 'installed': {
       # Need parameters from sys and unzip installed.
