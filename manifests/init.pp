@@ -59,7 +59,7 @@ class packer(
       )
 
       $packer_zip = "${cache_dir}/${packer_basename}"
-      $packer_url = "${base_url}/${version}/${packer_basename}"
+      $packer_url = "${base_url}${version}/${packer_basename}"
 
       # Ensure cache directory for Packer's zip archives exists.
       file { $cache_dir:
