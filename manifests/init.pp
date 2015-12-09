@@ -43,12 +43,6 @@ class packer(
         $arch = '386'
       }
 
-      if versioncmp($version, '0.7.0') >= 0 {
-        $prefix = 'packer_'
-      } else {
-        $prefix = ''
-      }
-
       # Escape periods in version for grep check.
       $version_escaped = join(split($version, '\.'), '\.')
 
@@ -61,11 +55,11 @@ class packer(
       }
 
       $packer_basename = inline_template(
-        "<%= \"#{@prefix}#{@version}_#{scope['::kernel'].downcase}_#{@arch}.zip\" %>"
+        "<%= \"packer_#{@version}_#{scope['::kernel'].downcase}_#{@arch}.zip\" %>"
       )
 
       $packer_zip = "${cache_dir}/${packer_basename}"
-      $packer_url = "${base_url}${packer_basename}"
+      $packer_url = "${base_url}/${version}/${packer_basename}"
 
       # Ensure cache directory for Packer's zip archives exists.
       file { $cache_dir:
