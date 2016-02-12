@@ -26,7 +26,7 @@ class packer(
   $version   = '0.8.5',
   $bin_dir   = '/usr/local/bin',
   $cache_dir = '/usr/local/packer',
-  $base_url  = 'https://dl.bintray.com/mitchellh/packer/',
+  $base_url  = 'https://releases.hashicorp.com/packer',
 ){
   validate_re($version, '^\d+\.\d+\.\d+$')
   validate_absolute_path([$bin_dir, $cache_dir])
@@ -65,7 +65,7 @@ class packer(
       )
 
       $packer_zip = "${cache_dir}/${packer_basename}"
-      $packer_url = "${base_url}${packer_basename}"
+      $packer_url = "${base_url}/${version}/${packer_basename}"
 
       # Ensure cache directory for Packer's zip archives exists.
       file { $cache_dir:
