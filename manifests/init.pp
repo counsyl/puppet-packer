@@ -43,12 +43,6 @@ class packer(
         $arch = '386'
       }
 
-      if versioncmp($version, '0.7.0') >= 0 {
-        $prefix = 'packer_'
-      } else {
-        $prefix = ''
-      }
-
       # Escape periods in version for grep check.
       $version_escaped = join(split($version, '\.'), '\.')
 
@@ -61,7 +55,7 @@ class packer(
       }
 
       $packer_basename = inline_template(
-        "<%= \"#{@prefix}#{@version}_#{scope['::kernel'].downcase}_#{@arch}.zip\" %>"
+        "<%= \"packer_#{@version}_#{scope['::kernel'].downcase}_#{@arch}.zip\" %>"
       )
 
       $packer_zip = "${cache_dir}/${packer_basename}"
@@ -95,50 +89,55 @@ class packer(
     }
     'absent', 'uninstalled': {
       # Ensure the binaries are removed.
-      $binaries = prefix(
-        [
-          'packer',
-          'packer-builder-amazon-chroot',
-          'packer-builder-amazon-ebs',
-          'packer-builder-amazon-instance',
-          'packer-builder-digitalocean',
-          'packer-builder-docker',
-          'packer-builder-file',
-          'packer-builder-googlecompute',
-          'packer-builder-null',
-          'packer-builder-openstack',
-          'packer-builder-parallels-iso',
-          'packer-builder-parallels-pvm',
-          'packer-builder-qemu',
-          'packer-builder-virtualbox-iso',
-          'packer-builder-virtualbox-ovf',
-          'packer-builder-vmware-iso',
-          'packer-builder-vmware-vmx',
-          'packer-post-processor-artifice',
-          'packer-post-processor-atlas',
-          'packer-post-processor-compress',
-          'packer-post-processor-docker-import',
-          'packer-post-processor-docker-push',
-          'packer-post-processor-docker-save',
-          'packer-post-processor-docker-tag',
-          'packer-post-processor-vagrant',
-          'packer-post-processor-vagrant-cloud',
-          'packer-post-processor-vsphere',
-          'packer-provisioner-ansible-local',
-          'packer-provisioner-chef-client',
-          'packer-provisioner-chef-solo',
-          'packer-provisioner-file',
-          'packer-provisioner-powershell',
-          'packer-provisioner-puppet-masterless',
-          'packer-provisioner-puppet-server',
-          'packer-provisioner-salt-masterless',
-          'packer-provisioner-shell',
-          'packer-provisioner-shell-local',
-          'packer-provisioner-windows-restart',
-          'packer-provisioner-windows-shell',
-        ],
-        "${bin_dir}/"
-      )
+      if versioncmp($version, '0.9.0') >= 0 {
+        # In 0.9.0+ consists of a single binary
+        $binaries = prefix('packer', "${bin_dir}/")
+      } else {
+        $binaries = prefix(
+          [
+            'packer',
+            'packer-builder-amazon-chroot',
+            'packer-builder-amazon-ebs',
+            'packer-builder-amazon-instance',
+            'packer-builder-digitalocean',
+            'packer-builder-docker',
+            'packer-builder-file',
+            'packer-builder-googlecompute',
+            'packer-builder-null',
+            'packer-builder-openstack',
+            'packer-builder-parallels-iso',
+            'packer-builder-parallels-pvm',
+            'packer-builder-qemu',
+            'packer-builder-virtualbox-iso',
+            'packer-builder-virtualbox-ovf',
+            'packer-builder-vmware-iso',
+            'packer-builder-vmware-vmx',
+            'packer-post-processor-artifice',
+            'packer-post-processor-atlas',
+            'packer-post-processor-compress',
+            'packer-post-processor-docker-import',
+            'packer-post-processor-docker-push',
+            'packer-post-processor-docker-save',
+            'packer-post-processor-docker-tag',
+            'packer-post-processor-vagrant',
+            'packer-post-processor-vagrant-cloud',
+            'packer-post-processor-vsphere',
+            'packer-provisioner-ansible-local',
+            'packer-provisioner-chef-client',
+            'packer-provisioner-chef-solo',
+            'packer-provisioner-file',
+            'packer-provisioner-powershell',
+            'packer-provisioner-puppet-masterless',
+            'packer-provisioner-puppet-server',
+            'packer-provisioner-salt-masterless',
+            'packer-provisioner-shell',
+            'packer-provisioner-shell-local',
+            'packer-provisioner-windows-restart',
+            'packer-provisioner-windows-shell',
+          ],
+          "${bin_dir}/"
+        )
+      }
 
       file { $binaries:
         ensure => absent,
