@@ -1,3 +1,9 @@
+## 0.9.18 (07/05/2016)
+
+IMPROVEMENTS:
+
+* Change Packer download URL via Joshua Spence (GH-7)
+
 ## 0.9.17 (08/12/2015)
 
 IMPROVEMENTS:
