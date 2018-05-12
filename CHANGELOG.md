@@ -1,3 +1,9 @@
+## 0.9.19 (05/12/2018)
+
+IMPROVEMENTS:
+
+* Update default version to 1.2.3 (Alan McGinlay).
+
 ## 0.9.18 (07/05/2016)
 
 IMPROVEMENTS:
