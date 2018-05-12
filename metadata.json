@@ -1,6 +1,6 @@
 {
   "name": "counsyl-packer",
-  "version": "0.9.18",
+  "version": "0.9.19",
   "source": "git://github.com/counsyl/puppet-packer.git",
   "author": "Counsyl, Inc.",
   "license": "Apache-2.0",
